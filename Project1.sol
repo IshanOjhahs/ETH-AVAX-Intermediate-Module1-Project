@@ -1,23 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-contract ValueContract {
-    uint256 private value;
+contract Functions_Errors {
+    uint256 private result;
 
-    function setValue(uint256 newValue) public {
-        require(newValue > 0, "Value must be positive");
-        value = newValue;
+    function add(uint256 value) public {
+        require(value > 0, "Value must be positive");
+        result += value;
     }
 
-    function getValue() public view returns (uint256) {
-        assert(value > 0);
-        return value;
+    function getResult() public view returns (uint256) {
+        assert(result >= 0);
+        return result;
     }
 
-    function resetValue() public {
-        if (value == 0) {
-            revert("Value is already zero");
+    function resetResult() public {
+        if (result == 0) {
+            revert("Result is already zero");
         }
-        value = 0;
+        result = 0;
     }
 }
