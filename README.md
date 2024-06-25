@@ -3,7 +3,7 @@
 This Solidity program demonstrates the basic syntax and functionality of the Solidity programming language.
 ## Description
 
-This project features a simple Solidity smart contract designed to demonstrate the use of the require(), assert(), and revert() statements for error handling. The contract includes functions to set, retrieve, and reset a stored value, with built-in validations to ensure proper usage. The setValue function allows setting a new value while ensuring the input is positive using the require() statement. The getValue function retrieves the stored value and employs the assert() statement to ensure the value has been set and is greater than zero. The resetValue function resets the stored value to zero, using the revert() statement to prevent resetting if the value is already zero. This contract provides a clear and practical example of implementing error handling mechanisms in Solidity to create robust and secure smart contracts.
+The Functions_Errors smart contract is a Solidity-based contract designed to perform basic arithmetic operations while demonstrating error handling techniques. It includes functions to add values to a cumulative result (add), retrieve the current result (getResult), and reset the result to zero (resetResult). The add function requires the input value to be positive, ensuring valid input with a require statement. The getResult function employs an assert statement to guarantee the result is non-negative, reflecting an internal consistency check. The resetResult function reverts the transaction if an attempt is made to reset an already zero result, showcasing the use of the revert statement to handle exceptional conditions. The contract is a straightforward example of how to implement and manage state while incorporating Solidity's error handling mechanisms to ensure reliable and predictable behavior.
 ## Getting Started
 
 ### Executing program
@@ -16,24 +16,24 @@ Once you are on the Remix website, create a new file by clicking on the "+" icon
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-contract ValueContract {
-    uint256 private value;
+contract Functions_Errors {
+    uint256 private result;
 
-    function setValue(uint256 newValue) public {
-        require(newValue > 0, "Value must be positive");
-        value = newValue;
+    function add(uint256 value) public {
+        require(value > 0, "Value must be positive");
+        result += value;
     }
 
-    function getValue() public view returns (uint256) {
-        assert(value > 0);
-        return value;
+    function getResult() public view returns (uint256) {
+        assert(result >= 0);
+        return result;
     }
 
-    function resetValue() public {
-        if (value == 0) {
-            revert("Value is already zero");
+    function resetResult() public {
+        if (result == 0) {
+            revert("Result is already zero");
         }
-        value = 0;
+        result = 0;
     }
 }
 
